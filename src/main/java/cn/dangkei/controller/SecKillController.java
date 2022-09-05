@@ -29,7 +29,7 @@ public class SecKillController {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list(Model model){
         List<SecKill> list = secKillService.getSecKillList();
-        logger.info("----------------into seckill list---------------------------------------------------");
+        logger.info("----------------进入秒杀列表---------------------------------------------------");
         model.addAttribute("list",list);
         return "list";
     }
@@ -53,7 +53,7 @@ public class SecKillController {
     @ResponseBody
     public SecKillResult<Exposer> exposer(@PathVariable("seckillId") Long seckillId){
         SecKillResult<Exposer> result;
-        logger.info("---------暴露秒杀链接----------------------");
+        logger.info("-----------暴露秒杀链接----------------------");
         try {
             Exposer exposer = secKillService.exportSecKillUrl(seckillId);
             result = new SecKillResult<Exposer>(true,exposer);

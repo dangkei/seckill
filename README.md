@@ -11,7 +11,8 @@
     3. 设计实体类cn.dangkei.entity包下类
     4. 设计mybatis接口cn.dangkei.dao包下类
     5. 开发接口实现类resource/mapper下对应接口的xml实现
-    6. unit test 注意@RunWith,@ContextConfiguration及@Resource,@Autowired等注解的用法
+    6. 配置logback.xml打印输出sql语句
+    7. unit test 注意@RunWith,@ContextConfiguration及@Resource,@Autowired等注解的用法
 
 二. Service层开发
 
@@ -34,11 +35,16 @@
         - SecKillResult类设计
     3. Web层spring的注入
         - resourses/spring-mvc.xml
-        - webapp/WEB-INF/web.xml文件DispatcherServlet的contextConfigLocation参数注入所有容器对象
+        - 通过webapp/WEB-INF/web.xml文件DispatcherServlet的contextConfigLocation参数注入所有容器对象
         注入所有容器对象    
     4. 前端页面开发
-    webapp/WEB-INF/jsp/list.jsp
-
+        webapp/WEB-INF/jsp/list.jsp，detail.jsp 
+        source/script/seckill.js
+        include用法，CDN的使用，cookie模拟注册，bootstrap用法,jstl使用，
+        jquery $.post，$.get与后端交互
+        seckill对象封装使用
+四
+ 
 ## 数据库设计
 src/main/sql/schema.sql
 ```sql
@@ -62,7 +68,7 @@ CREATE TABLE seckill(
   KEY idx_start_time(start_time),
   KEY idx_end_time(end_time)
 )ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='秒杀数据库';
-#mysql引擎配置为innordb，以便支持事务
+# mysql引擎配置为innordb，以便支持事务
 
 #初始化数据库
 INSERT INTO

@@ -11,7 +11,7 @@
 		values(#{id},#{phone},0)
 	</insert>
 	
-	<select id="queryByIdWithSeckill" resultType="SuccessKilled" parameterType="long">
+	<select id="queryByIdWithSeckill" resultType="cn.dangkei.entity.SuccessKilled" parameterType="long">
 		<!-- 根据seckill_id 查询successkilled 并携带一个seckill实体 -->
 		<!-- 告诉mybatis把结果映射到SuccessKilled的同时映射 seckill属性 -->
 		select 

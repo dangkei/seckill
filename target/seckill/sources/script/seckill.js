@@ -108,23 +108,17 @@ var seckill = {
                         $(this).addClass('disabled');
                         //2.发送秒杀请求执行秒杀
                         $.post(killUrl,{},function (result) {
-                            debugger
                             console.log(result);
                             //if(result && result['success']){
                                 var killResult = result['data'];
                                 var state = killResult['state'];
                                 var stateInfo = killResult['stateInfo'];
+                                //执行结果返回前端页面
                                 node.html('<span class="label label-success">'+stateInfo+'</span>');
-                           // }else {
-                                //node.html('<span class="label label-successe">'+stateInfo+'</span>');
-                            //}
                         });
                         debugger
                     });
-                    debugger
-                    console.log("----------------------");
                     node.show();
-                    console.log("======================");
                 }else{
                     //未开启秒杀
                     var now = exposer['now'];
