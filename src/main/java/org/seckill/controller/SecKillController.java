@@ -53,7 +53,7 @@ public class SecKillController {
     @ResponseBody
     public SecKillResult<Exposer> exposer(@PathVariable("seckillId") Long seckillId){
         SecKillResult<Exposer> result;
-        logger.info("---------进入秒杀----------------------");
+        logger.info("---------暴露秒杀链接----------------------");
         try {
             Exposer exposer = secKillService.exportSecKillUrl(seckillId);
             result = new SecKillResult<Exposer>(true,exposer);
