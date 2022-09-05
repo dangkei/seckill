@@ -1,4 +1,4 @@
-# 高并发秒杀系统
+# 高并发急速秒杀经典案例
 ## 整体开发思路，是从后端到前端再优化
 一.DAO层开发
 
@@ -27,6 +27,17 @@
         /seckill/list #查询秒杀列表页
         /seckill/{seckillId}/detail #查询单个秒杀详情页
         /seckill/time/now #查询当前时间
+        /seckill/{seckill}/exposer #暴露秒杀接口
+        /seckill/{seckill}/{md5}/execution #执行秒杀
+    2. 根据接口设计开发SecKillController类
+        - 注意 @RequestMapping,@PathVarible，@ReponseBody等注解用法
+        - SecKillResult类设计
+    3. Web层spring的注入
+        - resourses/spring-mvc.xml
+        - webapp/WEB-INF/web.xml文件DispatcherServlet的contextConfigLocation参数注入所有容器对象
+        注入所有容器对象    
+    4. 前端页面开发
+    webapp/WEB-INF/jsp/list.jsp
 
 ## 数据库设计
 src/main/sql/schema.sql
