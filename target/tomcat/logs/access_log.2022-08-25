@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [25/Aug/2022:11:51:13 +0800] "GET /seckill/ HTTP/1.1" 200 57 http-bio-8080-exec-1 674
+0:0:0:0:0:0:0:1 - - [25/Aug/2022:11:51:20 +0800] "GET /seckill/seckill/list HTTP/1.1" 404 991 http-bio-8080-exec-3 1431
