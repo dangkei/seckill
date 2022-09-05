@@ -1,24 +1,33 @@
 # 高并发秒杀系统
 ## 整体开发思路，是从后端到前端再优化
 一.DAO层开发
+
     1. 创建数据库及表格，初始化秒杀数据
     2. 通过sources/spring/spring-dao.xml配置dao层spring注入
-       配置数据库连接 jdbc.properties
-       连接池配置
-       sqlSessionFactory配置
-       mybatis接口mapper是在包配置
+       - 配置数据库连接 jdbc.properties
+       - 连接池配置
+       - sqlSessionFactory配置
+       - mybatis接口mapper是在包配置
     3. 设计实体类cn.dangkei.entity包下类
     4. 设计mybatis接口cn.dangkei.dao包下类
     5. 开发接口实现类resource/mapper下对应接口的xml实现
     6. unit test 注意@RunWith,@ContextConfiguration及@Resource,@Autowired等注解的用法
+
 二. Service层开发
+
     1. 开发cn.dangkei.service包下service接口
     2. 开发cn.dangkei.service.impl包下接口实现
     3. 完善数据传输类 cn.dangkei.dto，cn.dangkei.exception, cn.dangkei.enums
     4. 通过sources/spring/spring-service.xml配置service层注入
     5. unit test
+
 三. Web层及前端页面开发
+
     1. 根据需求设计需要用到的Restful接口
+        /seckill/list #查询秒杀列表页
+        /seckill/{seckillId}/detail #查询单个秒杀详情页
+        /seckill/time/now #查询当前时间
+
 ## 数据库设计
 src/main/sql/schema.sql
 ```sql
