@@ -1,4 +1,4 @@
-package org.seckill.exception;
+package cn.dangkei.exception;
 
 public class SecKillException extends RuntimeException {
     public SecKillException(String message) {

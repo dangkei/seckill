@@ -1,13 +1,13 @@
-package org.seckill.controller;
+package cn.dangkei.controller;
 
-import org.seckill.dto.Exposer;
-import org.seckill.dto.SecKillExecution;
-import org.seckill.dto.SecKillResult;
-import org.seckill.entity.SecKill;
-import org.seckill.enums.SecKillStatEnum;
-import org.seckill.exception.RepeatKillException;
-import org.seckill.exception.SecKillCloseException;
-import org.seckill.service.SecKillService;
+import cn.dangkei.dto.Exposer;
+import cn.dangkei.dto.SecKillResult;
+import cn.dangkei.enums.SecKillStatEnum;
+import cn.dangkei.exception.RepeatKillException;
+import cn.dangkei.exception.SecKillCloseException;
+import cn.dangkei.service.SecKillService;
+import cn.dangkei.dto.SecKillExecution;
+import cn.dangkei.entity.SecKill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

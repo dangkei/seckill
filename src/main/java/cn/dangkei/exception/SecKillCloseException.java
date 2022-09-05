@@ -1,4 +1,4 @@
-package org.seckill.exception;
+package cn.dangkei.exception;
 
 /**
  * 秒杀关闭异常

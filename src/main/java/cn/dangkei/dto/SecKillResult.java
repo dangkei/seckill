@@ -1,4 +1,4 @@
-package org.seckill.dto;
+package cn.dangkei.dto;
 
 /**
  * 所有ajax封装返回类型

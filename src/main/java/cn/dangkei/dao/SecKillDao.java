@@ -1,10 +1,10 @@
-package org.seckill.dao;
+package cn.dangkei.dao;
 
 import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.seckill.entity.SecKill;
+import cn.dangkei.entity.SecKill;
 
 public interface SecKillDao {
 	/*

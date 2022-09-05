@@ -1,4 +1,4 @@
-package org.seckill.entity;
+package cn.dangkei.entity;
 
 import java.util.Date;
 

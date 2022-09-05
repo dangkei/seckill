@@ -1,4 +1,4 @@
-package org.seckill.dto;
+package cn.dangkei.dto;
 
 import java.util.Date;
 

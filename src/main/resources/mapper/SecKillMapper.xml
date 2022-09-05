@@ -2,7 +2,7 @@
 <!DOCTYPE mapper 	
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.seckill.dao.SecKillDao">
+<mapper namespace="cn.dangkei.dao.SecKillDao">
 <!-- 目的：为DAO接口方法提供SQL语句配置 -->
 	<update id="reduceNumber">
 		update 
@@ -14,7 +14,7 @@
 		and number > 0;
 	</update>
 	
-	<select id="queryById" resultType="org.seckill.entity.SecKill" parameterType="long">
+	<select id="queryById" resultType="cn.dangkei.entity.SecKill" parameterType="long">
 		select seckill_id , name , number ,start_time,end_time,create_time
 		from seckill where seckill_id = #{seckillId}; 
 	</select>

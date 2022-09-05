@@ -1,7 +1,7 @@
-package org.seckill.dto;
+package cn.dangkei.dto;
 
-import org.seckill.entity.SuccessKilled;
-import org.seckill.enums.SecKillStatEnum;
+import cn.dangkei.enums.SecKillStatEnum;
+import cn.dangkei.entity.SuccessKilled;
 
 /**
  * 秒杀返回结果

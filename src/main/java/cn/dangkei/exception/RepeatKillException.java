@@ -1,4 +1,4 @@
-package org.seckill.exception;
+package cn.dangkei.exception;
 
 /**
  * 重复秒杀异常， 运行期异常。

@@ -1,8 +1,8 @@
-package org.seckill.dao;
+package cn.dangkei.dao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.seckill.entity.SuccessKilled;
+import cn.dangkei.entity.SuccessKilled;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

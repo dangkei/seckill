@@ -1,4 +1,4 @@
-package org.seckill.enums;
+package cn.dangkei.enums;
 
 /**
  * 使用枚举表述常量数据

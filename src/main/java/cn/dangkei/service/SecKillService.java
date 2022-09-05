@@ -1,13 +1,12 @@
-package org.seckill.service;
+package cn.dangkei.service;
 
-import org.seckill.dto.Exposer;
-import org.seckill.dto.SecKillExecution;
-import org.seckill.entity.SecKill;
-import org.seckill.exception.RepeatKillException;
-import org.seckill.exception.SecKillCloseException;
-import org.seckill.exception.SecKillException;
+import cn.dangkei.exception.RepeatKillException;
+import cn.dangkei.exception.SecKillCloseException;
+import cn.dangkei.exception.SecKillException;
+import cn.dangkei.dto.Exposer;
+import cn.dangkei.dto.SecKillExecution;
+import cn.dangkei.entity.SecKill;
 
-import javax.sql.rowset.serial.SerialException;
 import java.util.List;
 
 /*
@@ -40,5 +39,5 @@ public interface SecKillService {
      * @param md5
      */
     SecKillExecution executesSecKill(long seckillId,long phone , String md5)
-    throws SecKillException,SecKillCloseException,RepeatKillException;
+    throws SecKillException, SecKillCloseException, RepeatKillException;
 }

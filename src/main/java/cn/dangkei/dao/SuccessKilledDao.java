@@ -1,7 +1,7 @@
-package org.seckill.dao;
+package cn.dangkei.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.seckill.entity.SuccessKilled;
+import cn.dangkei.entity.SuccessKilled;
 
 public interface SuccessKilledDao {
 	/*

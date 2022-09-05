@@ -1,12 +1,12 @@
-package org.seckill.service;
+package cn.dangkei.service;
 
+import cn.dangkei.dto.Exposer;
+import cn.dangkei.exception.RepeatKillException;
+import cn.dangkei.exception.SecKillCloseException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.seckill.dto.Exposer;
-import org.seckill.dto.SecKillExecution;
-import org.seckill.entity.SecKill;
-import org.seckill.exception.RepeatKillException;
-import org.seckill.exception.SecKillCloseException;
+import cn.dangkei.dto.SecKillExecution;
+import cn.dangkei.entity.SecKill;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value = {"classpath:spring/spring-dao.xml",
         "classpath:spring/spring-service.xml"})
