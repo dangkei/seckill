@@ -43,7 +43,10 @@
         include用法，CDN的使用，cookie模拟注册，bootstrap用法,jstl使用，
         jquery $.post，$.get与后端交互
         seckill对象封装使用
-四
+
+四. 高并发优化
+
+    1. 
  
 ## 数据库设计
 src/main/sql/schema.sql
