@@ -42,4 +42,10 @@
 		<!-- 给出药扫描的Dao包 -->
 		<property name="basePackage" value="cn.dangkei.dao"/>
 	</bean>
+	<!--5. Redis dao注入-->
+	<bean id="redisDao" class="cn.dangkei.dao.cache.RedisDao">
+		<constructor-arg index="0" value="localhost"/>
+		<constructor-arg index="1" value="6379" />
+		<constructor-arg index="2" value="assoft"/>
+	</bean>
 </beans>

@@ -46,7 +46,9 @@
 
 四. 高并发优化
 
-    1. 
+    1. 开发RedisDao，使用redis缓存优化读取秒杀地址方法
+       引入Jedis依赖，使用JedisPoolConfig 配置密码连接
+       使用了解protostuff第三方序列化工具
  
 ## 数据库设计
 src/main/sql/schema.sql

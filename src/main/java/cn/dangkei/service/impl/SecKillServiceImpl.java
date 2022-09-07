@@ -1,5 +1,6 @@
 package cn.dangkei.service.impl;
 
+import cn.dangkei.dao.cache.RedisDao;
 import cn.dangkei.exception.RepeatKillException;
 import cn.dangkei.exception.SecKillCloseException;
 import cn.dangkei.exception.SecKillException;
@@ -29,6 +30,9 @@ public class SecKillServiceImpl implements SecKillService {
     private SecKillDao secKillDao;
 
     @Autowired
+    private RedisDao redisDao;
+
+    @Autowired
     private SuccessKilledDao successKilledDao;
 
     //用于混淆md5
@@ -36,7 +40,7 @@ public class SecKillServiceImpl implements SecKillService {
 
     @Override
     public List<SecKill> getSecKillList() {
-        return secKillDao.queryAll(0,4);
+        return secKillDao.queryAll(0, 4);
     }
 
     @Override
@@ -46,25 +50,34 @@ public class SecKillServiceImpl implements SecKillService {
 
     @Override
     public Exposer exportSecKillUrl(long seckillId) {
-        SecKill secKill = getById(seckillId);
-        if(null==secKill){
-            return  new Exposer(false,seckillId);
+        //先从redis中读取
+        SecKill secKill = redisDao.getSecKill(seckillId);  //getById(seckillId);
+        if (null == secKill) {
+            //redis中没有就从数据库中读取
+            secKill = secKillDao.queryById(seckillId);
+            if (secKill == null) {
+                //数据库中也没有，报错
+                return new Exposer(false, seckillId);
+            }else {
+                //数据库中有，存入redis给下次读取使用
+                redisDao.putSecKill(secKill);
+            }
         }
         Date startTime = secKill.getStartTime();
         Date endTime = secKill.getEndTime();
         Date nowTime = new Date();
-        if(nowTime.getTime() < startTime.getTime() ||
+        if (nowTime.getTime() < startTime.getTime() ||
                 nowTime.getTime() > endTime.getTime()) {
             //return new Exposer(false, seckillId, nowTime.getTime(), startTime.getTime()
             //        , endTime.getTime());
         }
         //转化特定字符串的过程，不可逆
         String md5 = getMD5(seckillId); //todo
-        return new Exposer(true,md5,seckillId);
+        return new Exposer(true, md5, seckillId);
     }
 
-    private String getMD5(long seckillId){
-        String base = seckillId+"/"+slat;
+    private String getMD5(long seckillId) {
+        String base = seckillId + "/" + slat;
         String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
         return md5;
     }
@@ -78,31 +91,30 @@ public class SecKillServiceImpl implements SecKillService {
      * 3.不是所有的方法都需要事务，如只有一条修改操作，或者只读操作。
      */
     public SecKillExecution executesSecKill(long seckillId, long phone, String md5) throws SecKillException, SecKillCloseException, RepeatKillException {
-        if(md5==null||!md5.equals(getMD5(seckillId))){
+        if (md5 == null || !md5.equals(getMD5(seckillId))) {
             throw new SecKillException("seckill data rewrite.");
         }
         //秒杀逻辑. 1.减库存， 2. 记录秒杀记录。
         Date nowTime = new Date();
         try {
-            int updateCount = secKillDao.reduceNumber(seckillId,nowTime);
-            if(updateCount<=0){
+            int updateCount = secKillDao.reduceNumber(seckillId, nowTime);
+            if (updateCount <= 0) {
                 //没有更新记录.
                 throw new SecKillCloseException("seckill is closed!");
-            }else{
-                int insertCount = successKilledDao.insertSuccessKilled(seckillId,phone);
-                if (insertCount<=0){
+            } else {
+                int insertCount = successKilledDao.insertSuccessKilled(seckillId, phone);
+                if (insertCount <= 0) {
                     throw new RepeatKillException("seckill repeated !");
-                }else {
-                    SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId,phone);
+                } else {
+                    SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId, phone);
                     return new SecKillExecution(seckillId, SecKillStatEnum.SUCCESS, successKilled);
                 }
             }
-        }catch (SecKillCloseException e1){
+        } catch (SecKillCloseException e1) {
             throw e1;
-        }catch (RepeatKillException e2){
+        } catch (RepeatKillException e2) {
             throw e2;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.error(e.getMessage(), e);
             throw new SecKillException("seckill inner error!" + e.getMessage());
         }

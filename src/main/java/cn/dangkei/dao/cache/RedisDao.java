@@ -1,6 +1,7 @@
 package cn.dangkei.dao.cache;
 
 import cn.dangkei.entity.SecKill;
+import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import redis.clients.jedis.JedisPoolConfig;
 public class RedisDao {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private final int timeout = 5000;
     private JedisPool jedisPool;
 
     public RedisDao(String ip, int port, String password) {
@@ -24,7 +26,7 @@ public class RedisDao {
         config.setMaxWaitMillis(1000 * 10);
         // 在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
         config.setTestOnBorrow(true);
-        jedisPool = new JedisPool(config, ip, port, 5000, password, 0);
+        jedisPool = new JedisPool(config, ip, port, timeout, password, 0);
     }
 
     private RuntimeSchema<SecKill> schema = RuntimeSchema.createFrom(SecKill.class);
@@ -57,6 +59,22 @@ public class RedisDao {
     }
 
     public String putSecKill(SecKill secKill) {
+        //set Object(secKill)-对象序列化->byte[]
+        try{
+            Jedis jedis = jedisPool.getResource();
+            try {
+                String key = "seckill:"+ secKill.getSeckillId();
+                byte[] bytes = ProtostuffIOUtil.toByteArray(secKill,schema,
+                        LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
+                String result = jedis.setex(key.getBytes(),timeout,bytes);
+                return result;
+            }finally {
+                jedis.close();
+            }
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+        }
+
         return null;
     }
 }

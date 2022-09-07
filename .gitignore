@@ -1,3 +1,5 @@
 #folders
 target
 out
+.idea
+.settings
