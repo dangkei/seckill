@@ -49,6 +49,9 @@
     1. 开发RedisDao，使用redis缓存优化读取秒杀地址方法
        引入Jedis依赖，使用JedisPoolConfig 配置密码连接
        使用了解protostuff第三方序列化工具
+    2. 使用数据库storeprocedure 将事务控制在数据库层
+    3. 调整insert操作到update语句之前执行，减少了一半行级锁持有时间。
+    4. 前端控制触发次数
  
 ## 数据库设计
 src/main/sql/schema.sql
@@ -140,7 +143,7 @@ jdbc.password=123456
 		<!-- 配置mybatis 全局属性 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 		<!-- 扫描entity包 使用别名 -->
-		<property name="typeAliasesPackage" value="org.seckill.entity"/>
+		<property name="typeAliasesPackage" value="cn.dangkei.entity"/>
 		<!-- 扫描接口实现xml -->
 		<property name="mapperLocations" value="classpath:mapper/*.xml"/>
 	</bean>
@@ -149,7 +152,7 @@ jdbc.password=123456
 		<!-- 注入sqlSessionFactory包 -->
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 		<!-- 给出药扫描的Dao包 -->
-		<property name="basePackage" value="org.seckill.dao"/>
+		<property name="basePackage" value="cn.dangkei.dao"/>
 	</bean>
 </beans>
 ```
